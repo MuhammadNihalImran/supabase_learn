@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import { supabase } from "../supabaseClient.js";
+import { supabase } from "./supabaseClient.js";
 const port = process.env.PORT || 5000;
 
 const app = express();
