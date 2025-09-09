@@ -6,12 +6,12 @@ function App() {
   const [title, setTitle] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:5000/todos").then((res) => setTodos(res.data));
+    axios.get("/todos").then((res) => setTodos(res.data));
   }, []);
 
   const addTodo = () => {
     if (!title.trim()) return;
-    axios.post("http://localhost:5000/todos", { title }).then((res) => {
+    axios.post("/todos", { title }).then((res) => {
       setTodos([...todos, res.data]);
       setTitle("");
     });
@@ -19,7 +19,9 @@ function App() {
 
   const toggleTodo = (id, completed) => {
     axios
-      .put(`http://localhost:5000/todos/${id}`, { completed: !completed })
+      .put(`/todos/${id}`, {
+        completed: !completed,
+      })
       .then(() => {
         setTodos(
           todos.map((todo) =>
@@ -30,7 +32,7 @@ function App() {
   };
 
   const deleteTodo = (id) => {
-    axios.delete(`http://localhost:5000/todos/${id}`).then(() => {
+    axios.delete(`/todos/${id}`).then(() => {
       setTodos(todos.filter((todo) => todo.id !== id));
     });
   };
