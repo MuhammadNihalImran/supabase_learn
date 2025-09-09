@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://supabase-learn-three.vercel.app",
   timeout: 5000,
 });
 
