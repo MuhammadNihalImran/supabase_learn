@@ -1,24 +1,24 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "./api/axios";
 
 function App() {
   const [todos, setTodos] = useState([]);
   const [title, setTitle] = useState("");
 
   useEffect(() => {
-    axios.get("/todos").then((res) => setTodos(res.data));
+    api.get("/todos").then((res) => setTodos(res.data));
   }, []);
 
   const addTodo = () => {
     if (!title.trim()) return;
-    axios.post("/todos", { title }).then((res) => {
+    api.post("/todos", { title }).then((res) => {
       setTodos([...todos, res.data]);
       setTitle("");
     });
   };
 
   const toggleTodo = (id, completed) => {
-    axios
+    api
       .put(`/todos/${id}`, {
         completed: !completed,
       })
@@ -32,7 +32,7 @@ function App() {
   };
 
   const deleteTodo = (id) => {
-    axios.delete(`/todos/${id}`).then(() => {
+    api.delete(`/todos/${id}`).then(() => {
       setTodos(todos.filter((todo) => todo.id !== id));
     });
   };
