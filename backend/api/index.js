@@ -6,6 +6,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.send("API is running...");
+});
+
 // ✅ Get all todos
 app.get("/todos", async (req, res) => {
   const { data, error } = await supabase.from("todos").select("*");
